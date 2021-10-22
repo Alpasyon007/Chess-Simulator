@@ -6,4 +6,6 @@ class Knight : public Piece {
 	public:
 		Knight(Color color);
 		~Knight();
+
+		bool Move() override;
 };

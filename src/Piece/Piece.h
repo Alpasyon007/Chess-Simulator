@@ -3,7 +3,6 @@
 enum Type {
 	PAWN = 0,
 	KNIGHT,
-	KING,
 	BISHOP,
 	ROOK,
 	QUEEN,

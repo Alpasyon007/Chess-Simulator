@@ -6,4 +6,6 @@ class Pawn : public Piece {
 	public:
 		Pawn(Color color);
 		~Pawn();
+
+		bool Move() override;
 };
