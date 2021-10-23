@@ -20,7 +20,7 @@ class Piece {
 		Color m_color;
 	protected:
 		Piece(Color Color);
-		~Piece();
+		virtual ~Piece();
 	public:
-		virtual bool Move() = 0;
+		virtual bool Move();
 };

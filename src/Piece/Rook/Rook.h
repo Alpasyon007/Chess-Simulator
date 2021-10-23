@@ -6,4 +6,6 @@ class Rook : public Piece {
 	public:
 		Rook(Color color);
 		~Rook();
+
+		bool Move() override;
 };

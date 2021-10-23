@@ -6,4 +6,6 @@ class Bishop : public Piece {
 	public:
 		Bishop(Color color);
 		~Bishop();
+
+		bool Move() override;
 };

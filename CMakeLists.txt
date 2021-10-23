@@ -18,10 +18,10 @@ project(ChessSim)
 add_executable(
 	ChessSim
 		${SOURCE_DIR}/main.cpp
-		${SOURCE_DIR}/Piece/Piece.cpp
-		${SOURCE_DIR}/Piece/Piece.h
 		${SOURCE_DIR}/Chessboard/Chessboard.cpp
 		${SOURCE_DIR}/Chessboard/Chessboard.h
+		${SOURCE_DIR}/Piece/Piece.cpp
+		${SOURCE_DIR}/Piece/Piece.h
 		${SOURCE_DIR}/Piece/Pawn/Pawn.cpp
 		${SOURCE_DIR}/Piece/Pawn/Pawn.h
 		${SOURCE_DIR}/Piece/Knight/Knight.cpp

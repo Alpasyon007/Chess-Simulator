@@ -6,4 +6,6 @@ class Queen : public Piece {
 	public:
 		Queen(Color color);
 		~Queen();
+
+		bool Move() override;
 };
