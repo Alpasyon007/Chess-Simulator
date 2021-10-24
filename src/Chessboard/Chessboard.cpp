@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Chessboard.h"
 
+// Macro white pieces
 #define WHITE_PAWN(_ARG_) &White.pawn[_ARG_]
 #define WHITE_KNIGHT(_ARG_) &White.knight[_ARG_]
 #define WHITE_BISHOP(_ARG_) &White.bishop[_ARG_]
@@ -8,6 +9,7 @@
 #define WHITE_QUEEN &White.queen
 #define WHITE_KING &White.king
 
+// Macro black pieces
 #define BLACK_PAWN(_ARG_) &Black.pawn[_ARG_]
 #define BLACK_KNIGHT(_ARG_) &Black.knight[_ARG_]
 #define BLACK_BISHOP(_ARG_) &Black.bishop[_ARG_]
@@ -15,7 +17,8 @@
 #define BLACK_QUEEN &Black.queen
 #define BLACK_KING &Black.king
 
-Chessboard::Chessboard() : m_boardMatrix{
+Chessboard::Chessboard() : m_boardMatrix {
+	// Construct initial board state
 	{ BLACK_ROOK(0),	BLACK_KNIGHT(0),	BLACK_BISHOP(0),	BLACK_QUEEN,	BLACK_KING,		BLACK_BISHOP(1),	BLACK_KNIGHT(1),	BLACK_ROOK(1) },
 	{ BLACK_PAWN(0),	BLACK_PAWN(1),		BLACK_PAWN(2),		BLACK_PAWN(3),	BLACK_PAWN(4),	BLACK_PAWN(5),		BLACK_PAWN(6),		BLACK_PAWN(7) },
 	{ nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr },
@@ -33,12 +36,15 @@ void Chessboard::PrintBoard() {
 		// Itreate over the files
 		for (int j = 0; j < FILES; j++)	{
 			// Print the squares
+			// If square is empty print 0
 			if(m_boardMatrix[i][j] == nullptr) {
-				std::cout << m_boardMatrix[i][j] << "\t";
+				std::cout << m_boardMatrix[i][j] << "  ";
 				continue;
 			}
-			std::cout << *m_boardMatrix[i][j] << "   ";
+			// If there is a piece print out the piece
+			std::cout << *m_boardMatrix[i][j] << " ";
 		}
+		// Print newline at the end of a rank
 		std::cout << std::endl;
 	}
 }

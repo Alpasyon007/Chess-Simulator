@@ -1,6 +1,6 @@
 #include "Rook.h"
 
-Rook::Rook(Color color) : Piece(color) {}
+Rook::Rook(Color color) : Piece(color, ROOK) {}
 
 Rook::~Rook() {}
 
