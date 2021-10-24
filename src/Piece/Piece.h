@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 enum Type {
 	PAWN = 0,
 	KNIGHT,
@@ -23,4 +25,7 @@ class Piece {
 		virtual ~Piece();
 	public:
 		virtual bool Move();
+		virtual Color GetColor() const { return m_color; }
+
+		friend std::ostream& operator<<(std::ostream& out, const Piece& piece);
 };

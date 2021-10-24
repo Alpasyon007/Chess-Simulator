@@ -21,8 +21,8 @@ struct WhitePieces {
 	Knight knight[2] = { Knight(WHITE), Knight(WHITE) };
 	Bishop bishop[2] = { Bishop(WHITE), Bishop(WHITE) };
 	Rook rook[2] = { Rook(WHITE), Rook(WHITE) };
-	Queen queen[2] = { Queen(WHITE), Queen(WHITE) };
-	King king[2] = { King(WHITE), King(WHITE) };
+	Queen queen = Queen(WHITE);
+	King king = King(WHITE);
 };
 
 struct BlackPieces {
@@ -30,8 +30,8 @@ struct BlackPieces {
 	Knight knight[2] = { Knight(BLACK), Knight(BLACK) };
 	Bishop bishop[2] = { Bishop(BLACK), Bishop(BLACK) };
 	Rook rook[2] = { Rook(BLACK), Rook(BLACK) };
-	Queen queen[2] = { Queen(BLACK), Queen(BLACK) };
-	King king[2] = { King(BLACK), King(BLACK) };
+	Queen queen = Queen(BLACK);
+	King king = King(BLACK);
 };
 
 class Chessboard {
