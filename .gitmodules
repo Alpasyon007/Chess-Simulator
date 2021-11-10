@@ -1,0 +1,3 @@
+[submodule "submodules/OpenImageIO"]
+	path = submodules/OpenImageIO
+	url = https://github.com/OpenImageIO/oiio.git
