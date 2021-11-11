@@ -6,42 +6,38 @@ Piece::~Piece() {};
 
 bool Piece::Move() { return false; }
 
-std::string ColorToText(Color color) {
-	switch (color) {
-		case WHITE:
-			return "W";
-			break;
-		case BLACK:
-			return "B";
-			break;
+char ToString(Color color) {
+	const std::map<Color, char> colorMap = {
+		{WHITE, 'W'},
+		{BLACK, 'B'}};
+
+	for( auto pair : colorMap ) {
+		if(pair.first == color ) {
+			return pair.second;
+		}
 	}
-	return "INVALID";
+
+	return '0';
 };
 
-std::string TypeToText(Type type) {
-	switch (type) {
-		case PAWN:
-			return "P";
-			break;
-		case KNIGHT:
-			return "K";
-			break;
-		case BISHOP:
-			return "B";
-			break;
-		case ROOK:
-			return "R";
-			break;
-		case QUEEN:
-			return "Q";
-			break;
-		case KING:
-			return "K";
-			break;
+char ToString(Type type) {
+	const std::map<Type, char> typeMap = {
+		{PAWN,		'P'},
+		{KNIGHT,	'N'},
+		{BISHOP,	'B'},
+		{ROOK,		'R'},
+		{QUEEN,		'Q'},
+		{KING,		'K'}};
+
+	for( auto pair : typeMap ) {
+		if(pair.first == type ) {
+			return pair.second;
+		}
 	}
-	return "INVALID";
+
+	return '0';
 };
 
 std::ostream& operator<<(std::ostream& out, const Piece& piece) {
-	return (out << ColorToText(piece.GetColor()) << TypeToText(piece.GetType()));
+	return (out << ToString(piece.GetColor()) << ToString(piece.GetType()));
 }

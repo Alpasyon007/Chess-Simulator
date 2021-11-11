@@ -37,26 +37,26 @@ add_executable(
 	${SOURCE_DIR}/Piece/Queen/Queen.h
 	${SOURCE_DIR}/Piece/King/King.cpp
 	${SOURCE_DIR}/Piece/King/King.h
-)
+	)
 
-# Link to GLFW and OpenGL
-target_link_libraries(ChessSim glfw)
-target_link_libraries(ChessSim OpenGL::GL)
+	# Link to GLFW and OpenGL
+	target_link_libraries(ChessSim glfw)
+	target_link_libraries(ChessSim OpenGL::GL)
 
-# Include target directories
-target_include_directories(
-	ChessSim
-	PRIVATE
-	${SOURCE_DIR}/Chessboard
-	${SOURCE_DIR}/Piece
-	${SOURCE_DIR}/Piece/Pawn
-	${SOURCE_DIR}/Piece/Knight
-	${SOURCE_DIR}/Piece/Bishop
-	${SOURCE_DIR}/Piece/Rook
-	${SOURCE_DIR}/Piece/Queen
-	${SOURCE_DIR}/Piece/King
-)
+	# Include target directories
+	target_include_directories(
+		ChessSim
+		PRIVATE
+		${SOURCE_DIR}/Chessboard
+		${SOURCE_DIR}/Piece
+		${SOURCE_DIR}/Piece/Pawn
+		${SOURCE_DIR}/Piece/Knight
+		${SOURCE_DIR}/Piece/Bishop
+		${SOURCE_DIR}/Piece/Rook
+		${SOURCE_DIR}/Piece/Queen
+		${SOURCE_DIR}/Piece/King
+	)
 
-
-# Defines
-target_compile_definitions(ChessSim PUBLIC TERMINAL_OUT)
+	# Add subdirectory
+	#add_subdirectory(submodules/OpenEXR/)
+	#add_subdirectory(submodules/OpenImageIO/)
