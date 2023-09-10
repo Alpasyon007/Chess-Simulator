@@ -4,7 +4,12 @@ Piece::Piece(Color color, Type type) : m_color(color), m_type(type) {}
 
 Piece::~Piece() {}
 
-bool		Piece::IsValidMove(int rank, int file, int toRank, int toFile) { return false; }
+bool Piece::IsValidMove(int rank, int file, int toRank, int toFile) {
+	// Check if the move is within the bounds of the chessboard (usually 8x8).
+	if(rank < 0 || rank >= 7 || file < 0 || file >= 7 || toRank < 0 || toRank >= 7 || toFile < 0 || toFile >= 7) { return false; }
+
+	return true;
+}
 
 std::string ToString(Color color) {
 	const std::map<Color, std::string> colorMap = {{WHITE, "White"}, {BLACK, "Black"}};

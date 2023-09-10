@@ -26,7 +26,7 @@ Chessboard::Chessboard()
 					{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
 					{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
 					{WHITE_PAWN(0), WHITE_PAWN(1), WHITE_PAWN(2), WHITE_PAWN(3), WHITE_PAWN(4), WHITE_PAWN(5), WHITE_PAWN(6), WHITE_PAWN(7)},
-					{WHITE_ROOK(0), WHITE_KNIGHT(0), WHITE_BISHOP(0), WHITE_QUEEN, WHITE_KING, WHITE_BISHOP(1), WHITE_KNIGHT(1), WHITE_ROOK(1)}} {}
+					{WHITE_ROOK(0), WHITE_KNIGHT(0), WHITE_BISHOP(0), WHITE_QUEEN, WHITE_KING, WHITE_BISHOP(1), WHITE_KNIGHT(1), WHITE_ROOK(1)}}, m_currentTurn(WHITE) {}
 
 void Chessboard::PrintBoard() {
 	static const std::string ideographicSpace = "\u3000";
@@ -34,7 +34,7 @@ void Chessboard::PrintBoard() {
 	static const std::string fileLabels		  = "abcdefgh";
 
 	// ANSI escape codes to clear the screen
-	std::cout << "\033[H\033[J";
+	// std::cout << "\033[H\033[J";
 
 	// Print file labels
 	std::cout << ideographicSpace;
@@ -45,7 +45,7 @@ void Chessboard::PrintBoard() {
 
 	// Iterate over the ranks
 	for(int rank = 0; rank < RANKS; rank++) {
-		std::cout << rank << punctuationSpace;
+		std::cout << (8 - rank) << punctuationSpace;
 
 		// Iterate over the files
 		for(int file = 0; file < FILES; file++) {
@@ -56,7 +56,7 @@ void Chessboard::PrintBoard() {
 			}
 		}
 
-		std::cout << punctuationSpace << rank << std::endl;
+		std::cout << punctuationSpace << (8 - rank) << std::endl;
 	}
 
 	// Print file labels again
@@ -68,10 +68,17 @@ void Chessboard::PrintBoard() {
 }
 
 void Chessboard::MovePiece(int rank, int file, int toRank, int toFile) {
-	bool validMove = m_boardMatrix[rank][file]->IsValidMove(rank, file, toRank, toFile);
+	Piece** currentPiece = &(m_boardMatrix[rank][file]);
+	bool	validMove	 = (*currentPiece)->IsValidMove(rank, file, toRank, toFile) && (*currentPiece)->GetColor() == m_currentTurn;
 
 	if(validMove) {
-		m_boardMatrix[toRank][toFile] = m_boardMatrix[rank][file];
-		m_boardMatrix[rank][file]	  = nullptr;
+		m_boardMatrix[toRank][toFile] = *currentPiece;
+		*currentPiece				  = nullptr;
+		m_currentTurn				  = static_cast<Color>(m_currentTurn ^ BLACK);
 	};
+}
+
+void Chessboard::MovePiece(PiecePosition currentPosition, PiecePosition targetPosition) {
+	std::cout << currentPosition.GetRank() << currentPosition.GetFile() << targetPosition.GetRank() << targetPosition.GetFile() << std::endl;
+	MovePiece(currentPosition.GetRank(), currentPosition.GetFile(), targetPosition.GetRank(), targetPosition.GetFile());
 }

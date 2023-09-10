@@ -8,11 +8,13 @@
 #include "../Piece/Pawn/Pawn.h"
 #include "../Piece/Queen/Queen.h"
 #include "../Piece/Rook/Rook.h"
+#include "../PiecePosition/PiecePosition.h"
 
 #define RANKS 8
 #define FILES 8
 
 enum Status {
+
 	EMPTY = 0,
 	OCCUPIED
 };
@@ -39,18 +41,19 @@ class Chessboard {
 private:
 	Piece*		m_boardMatrix[RANKS][FILES];
 
+	Color		m_currentTurn;
+
 	// White Pieces
 	WhitePieces White;
-
 	// Black Pieces
 	BlackPieces Black;
 private:
 public:
 	Chessboard();
 	Chessboard(int boardMatrix[RANKS][FILES]);
-	// ~Chessboard();
 
 	// Print the chessboard
 	void PrintBoard();
 	void MovePiece(int rank, int file, int toRank, int toFile);
+	void MovePiece(PiecePosition currentPosition, PiecePosition targetPosition);
 };

@@ -37,6 +37,8 @@ add_executable(
 	${SOURCE_DIR}/Piece/Queen/Queen.h
 	${SOURCE_DIR}/Piece/King/King.cpp
 	${SOURCE_DIR}/Piece/King/King.h
+	${SOURCE_DIR}/PiecePosition/PiecePosition.cpp
+	${SOURCE_DIR}/PiecePosition/PiecePosition.h
 	)
 
 	# Include target directories
@@ -51,4 +53,5 @@ add_executable(
 		${SOURCE_DIR}/Piece/Rook
 		${SOURCE_DIR}/Piece/Queen
 		${SOURCE_DIR}/Piece/King
+		${SOURCE_DIR}/PiecePosition
 	)
