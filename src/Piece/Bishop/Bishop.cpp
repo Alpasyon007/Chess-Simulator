@@ -4,4 +4,4 @@ Bishop::Bishop(Color color) : Piece(color, BISHOP) {}
 
 Bishop::~Bishop() {}
 
-bool Bishop::Move() { return false; }
+bool Bishop::IsValidMove(int rank, int file, int toRank, int toFile) { return false; }

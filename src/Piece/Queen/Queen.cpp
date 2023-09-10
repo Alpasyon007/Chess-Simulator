@@ -4,4 +4,4 @@ Queen::Queen(Color color) : Piece(color, QUEEN) {}
 
 Queen::~Queen() {}
 
-bool Queen::Move() { return false; }
+bool Queen::IsValidMove(int rank, int file, int toRank, int toFile) { return false; }

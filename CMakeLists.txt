@@ -39,10 +39,6 @@ add_executable(
 	${SOURCE_DIR}/Piece/King/King.h
 	)
 
-	# Link to GLFW and OpenGL
-	target_link_libraries(ChessSim glfw)
-	target_link_libraries(ChessSim OpenGL::GL)
-
 	# Include target directories
 	target_include_directories(
 		ChessSim
@@ -56,7 +52,3 @@ add_executable(
 		${SOURCE_DIR}/Piece/Queen
 		${SOURCE_DIR}/Piece/King
 	)
-
-	# Add subdirectory
-	#add_subdirectory(submodules/OpenEXR/)
-	#add_subdirectory(submodules/OpenImageIO/)

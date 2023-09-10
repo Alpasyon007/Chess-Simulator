@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <map>
+#include <string>
 
 enum Type {
 	PAWN = 0,
@@ -18,18 +19,21 @@ enum Color {
 };
 
 class Piece {
-	protected:
-		Type m_type;
-		Color m_color;
-	protected:
-		Piece(Color Color, Type type);
-		virtual ~Piece();
-	public:
-		virtual bool Move();
-		virtual Color GetColor() const { return m_color; }
-		virtual Type GetType() const { return m_type; }
+protected:
+	Type  m_type;
+	Color m_color;
+protected:
+	Piece(Color Color, Type type);
+	virtual ~Piece();
+public:
+	virtual bool		 IsValidMove(int rank, int file, int toRank, int toFile);
 
-		friend std::ostream& operator<<(std::ostream& out, const Piece& piece);
-		friend /*std::map<Type, std::string>*/ char ToString(Type type);
-		friend /*std::map<Color, std::string>*/ char ToString(Color color);
+	virtual Color		 GetColor() const { return m_color; }
+
+	virtual Type		 GetType() const { return m_type; }
+
+	friend std::ostream& operator<<(std::ostream& out, const Piece& piece);
+
+	friend std::string	 ToString(Type type);
+	friend std::string	 ToString(Color color);
 };

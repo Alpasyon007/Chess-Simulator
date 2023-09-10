@@ -2,10 +2,10 @@
 #include "../Piece.h"
 
 class Pawn : public Piece {
-	private:
-	public:
-		Pawn(Color color);
-		~Pawn();
+private:
+public:
+	Pawn(Color color);
+	~Pawn();
 
-		bool Move() override;
+	bool IsValidMove(int rank, int file, int toRank, int toFile) override;
 };

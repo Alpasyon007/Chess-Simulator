@@ -4,4 +4,4 @@ Rook::Rook(Color color) : Piece(color, ROOK) {}
 
 Rook::~Rook() {}
 
-bool Rook::Move() { return false; }
+bool Rook::IsValidMove(int rank, int file, int toRank, int toFile) { return false; }
