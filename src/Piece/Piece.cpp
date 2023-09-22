@@ -6,13 +6,16 @@ Piece::~Piece() {}
 
 bool Piece::IsValidMove(int rank, int file, int toRank, int toFile) {
 	// Check if the move is within the bounds of the chessboard (usually 8x8).
-	if(rank < 0 || rank >= 7 || file < 0 || file >= 7 || toRank < 0 || toRank >= 7 || toFile < 0 || toFile >= 7) { return false; }
-
-	return true;
+	return (toRank >= 0 && toRank < 8 && toFile >= 0 && toFile < 8);
 }
 
-std::string ToString(Color color) {
-	const std::map<Color, std::string> colorMap = {{WHITE, "White"}, {BLACK, "Black"}};
+bool Piece::IsValidCapture(int rank, int file, int toRank, int toFile) {
+	// Check if the move is within the bounds of the chessboard (usually 8x8).
+	return (toRank >= 0 && toRank < 8 && toFile >= 0 && toFile < 8);
+}
+
+std::wstring ToString(Color color) {
+	const std::map<Color, std::wstring> colorMap = {{WHITE, L"White"}, {BLACK, L"Black"}};
 
 	for(auto pair : colorMap) {
 		if(pair.first == color) { return pair.second; }
@@ -21,8 +24,9 @@ std::string ToString(Color color) {
 	return nullptr;
 }
 
-std::string ToString(Type type) {
-	const std::map<Type, std::string> typeMap = {{PAWN, "Pawn"}, {KNIGHT, "Knight"}, {BISHOP, "Bishop"}, {ROOK, "Rook"}, {QUEEN, "Queen"}, {KING, "King"}};
+std::wstring ToString(Type type) {
+	const std::map<Type, std::wstring> typeMap = {{PAWN, L"Pawn"}, {KNIGHT, L"Knight"}, {BISHOP, L"Bishop"},
+												  {ROOK, L"Rook"}, {QUEEN, L"Queen"},	{KING, L"King"}};
 
 	for(auto pair : typeMap) {
 		if(pair.first == type) { return pair.second; }
@@ -31,10 +35,21 @@ std::string ToString(Type type) {
 	return nullptr;
 }
 
-std::ostream& operator<<(std::ostream& out, const Piece& piece) {
-	const std::map<std::pair<Color, Type>, std::string> pieceMap = {
-		{{WHITE, PAWN}, "♙"}, {{WHITE, KNIGHT}, "♘"}, {{WHITE, BISHOP}, "♗"}, {{WHITE, ROOK}, "♖"}, {{WHITE, QUEEN}, "♕"}, {{WHITE, KING}, "♔"},
-		{{BLACK, PAWN}, "♟︎"}, {{BLACK, KNIGHT}, "♞"}, {{BLACK, BISHOP}, "♝"}, {{BLACK, ROOK}, "♜"}, {{BLACK, QUEEN}, "♛"}, {{BLACK, KING}, "♚"}};
+std::wostream& operator<<(std::wostream& out, const Piece& piece) {
+	const std::map<std::pair<Color, Type>, std::wstring> pieceMap = {
+		{{WHITE, PAWN}, L"\u2659"},	  // ♙
+		{{WHITE, KNIGHT}, L"\u2658"}, // ♘
+		{{WHITE, BISHOP}, L"\u2657"}, // ♗
+		{{WHITE, ROOK}, L"\u2656"},	  // ♖
+		{{WHITE, QUEEN}, L"\u2655"},  // ♕
+		{{WHITE, KING}, L"\u2654"},	  // ♔
+		{{BLACK, PAWN}, L"\u265F"},	  // ♟
+		{{BLACK, KNIGHT}, L"\u265E"}, // ♞
+		{{BLACK, BISHOP}, L"\u265D"}, // ♝
+		{{BLACK, ROOK}, L"\u265C"},	  // ♜
+		{{BLACK, QUEEN}, L"\u265B"},  // ♛
+		{{BLACK, KING}, L"\u265A"}	  // ♚
+	};
 
 	return (out << pieceMap.find({piece.GetColor(), piece.GetType()})->second);
 }

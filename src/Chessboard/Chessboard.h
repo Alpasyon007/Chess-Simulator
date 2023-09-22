@@ -1,5 +1,6 @@
 #pragma once
 
+#include <utility>
 #include <vector>
 
 #include "../Piece/Bishop/Bishop.h"
@@ -14,7 +15,6 @@
 #define FILES 8
 
 enum Status {
-
 	EMPTY = 0,
 	OCCUPIED
 };
@@ -38,6 +38,23 @@ struct BlackPieces {
 };
 
 class Chessboard {
+public:
+	Chessboard();
+	Chessboard(int boardMatrix[RANKS][FILES]);
+
+	// Print the chessboard
+	void					   PrintBoard();
+	void					   PrintSquaresUnderThreat();
+
+	void					   MovePiece(int rank, int file, int toRank, int toFile);
+	void					   MovePiece(PiecePosition currentPosition, PiecePosition targetPosition);
+
+	std::vector<PiecePosition> GetSquaresUnderThreat();
+
+	bool					   CanCastleQueenSide();
+	bool					   CanCastleKingSide();
+private:
+	std::string InternalToAlegbraicNotation(std::pair<int, int> internalNotation);
 private:
 	Piece*		m_boardMatrix[RANKS][FILES];
 
@@ -47,13 +64,4 @@ private:
 	WhitePieces White;
 	// Black Pieces
 	BlackPieces Black;
-private:
-public:
-	Chessboard();
-	Chessboard(int boardMatrix[RANKS][FILES]);
-
-	// Print the chessboard
-	void PrintBoard();
-	void MovePiece(int rank, int file, int toRank, int toFile);
-	void MovePiece(PiecePosition currentPosition, PiecePosition targetPosition);
 };
