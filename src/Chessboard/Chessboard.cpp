@@ -19,76 +19,24 @@
 #define BLACK_QUEEN			&Black.queen
 #define BLACK_KING			&Black.king
 
-Chessboard::Chessboard()
-	: m_boardMatrix{// Construct initial board state
-					// {BLACK_ROOK(0), BLACK_KNIGHT(0), BLACK_BISHOP(0), BLACK_QUEEN, BLACK_KING, BLACK_BISHOP(1), BLACK_KNIGHT(1), BLACK_ROOK(1)},
-					// {BLACK_PAWN(0), BLACK_PAWN(1), BLACK_PAWN(2), BLACK_PAWN(3), BLACK_PAWN(4), BLACK_PAWN(5), BLACK_PAWN(6), BLACK_PAWN(7)},
-					// {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-					// {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-					// {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-					// {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-					// {WHITE_PAWN(0), WHITE_PAWN(1), WHITE_PAWN(2), WHITE_PAWN(3), WHITE_PAWN(4), WHITE_PAWN(5), WHITE_PAWN(6), WHITE_PAWN(7)},
-					// {WHITE_ROOK(0), WHITE_KNIGHT(0), WHITE_BISHOP(0), WHITE_QUEEN, WHITE_KING, WHITE_BISHOP(1), WHITE_KNIGHT(1), WHITE_ROOK(1)}
-					{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-					{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-					{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-					{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-					{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-					{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-					{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
-					{nullptr, WHITE_BISHOP(0), nullptr, nullptr, nullptr, nullptr, nullptr}
-					}, m_currentTurn(WHITE) {}
-
-void Chessboard::PrintBoard() {
-	static const std::wstring ideographicSpace = L"\u3000";
-	static const std::wstring punctuationSpace = L"\u2008";
-	static const std::wstring fileLabels	   = L"abcdefgh";
-
-	// ANSI escape codes to clear the screen
-	std::wcout << L"\033[H\033[J";
-
-	// Print file labels
-	std::wcout << ideographicSpace << ideographicSpace;
-	for(wchar_t file : fileLabels) {
-		std::wcout << file << punctuationSpace;
-	}
-	std::wcout << std::endl;
-	std::wcout << ideographicSpace << ideographicSpace;
-	for(int i = 0; i < 8; i++) {
-		std::wcout << i << punctuationSpace;
-	}
-	std::wcout << std::endl;
-
-	// Iterate over the ranks
-	for(int rank = 0; rank < RANKS; rank++) {
-		std::wcout << (8 - rank) << punctuationSpace;
-		std::wcout << (rank) << punctuationSpace;
-
-		// Iterate over the files
-		for(int file = 0; file < FILES; file++) {
-			if(m_boardMatrix[rank][file] == nullptr) {
-				std::wcout << ideographicSpace;
-			} else {
-				std::wcout << *m_boardMatrix[rank][file] << " ";
-			}
-		}
-
-		std::wcout << punctuationSpace << (rank) << punctuationSpace;
-		std::wcout << punctuationSpace << (8 - rank) << std::endl;
+#define BOARD                                                                                                                             \
+	{BLACK_ROOK(0), BLACK_KNIGHT(0), BLACK_BISHOP(0), BLACK_QUEEN, BLACK_KING, BLACK_BISHOP(1), BLACK_KNIGHT(1), BLACK_ROOK(1)},          \
+		{BLACK_PAWN(0), BLACK_PAWN(1), BLACK_PAWN(2), BLACK_PAWN(3), BLACK_PAWN(4), BLACK_PAWN(5), BLACK_PAWN(6), BLACK_PAWN(7)},         \
+		{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, \
+		{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, \
+		{WHITE_PAWN(0), WHITE_PAWN(1), WHITE_PAWN(2), WHITE_PAWN(3), WHITE_PAWN(4), WHITE_PAWN(5), WHITE_PAWN(6), WHITE_PAWN(7)}, {       \
+		WHITE_ROOK(0), WHITE_KNIGHT(0), WHITE_BISHOP(0), WHITE_QUEEN, WHITE_KING, WHITE_BISHOP(1), WHITE_KNIGHT(1), WHITE_ROOK(1)         \
 	}
 
-	// Print file labels again
-	std::wcout << ideographicSpace << ideographicSpace;
-	for(wchar_t file : fileLabels) {
-		std::wcout << file << punctuationSpace;
+#define TEST_BOARD                                                                                                                            \
+	{nullptr, nullptr, BLACK_BISHOP(0), nullptr, nullptr, nullptr, nullptr}, {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, \
+		{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     \
+		{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},     \
+		{nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}, {                                                                    \
+		nullptr, nullptr, WHITE_BISHOP(0), nullptr, nullptr, nullptr, nullptr                                                                 \
 	}
-	std::wcout << std::endl;
-	std::wcout << ideographicSpace << ideographicSpace;
-	for(int i = 0; i < 8; i++) {
-		std::wcout << i << punctuationSpace;
-	}
-	std::wcout << std::endl;
-}
+
+Chessboard::Chessboard() : m_boardMatrix{TEST_BOARD}, m_currentTurn(WHITE) {}
 
 void Chessboard::MovePiece(int rank, int file, int toRank, int toFile) {
 	Piece** currentPiece = &(m_boardMatrix[rank][file]);
@@ -200,6 +148,57 @@ bool Chessboard::CanCastleQueenSide() {
 		}
 	}
 	return false;
+}
+
+void Chessboard::PrintBoard() {
+	static const std::wstring ideographicSpace = L"\u3000";
+	static const std::wstring punctuationSpace = L"\u2008";
+	static const std::wstring fileLabels	   = L"abcdefgh";
+
+	// ANSI escape codes to clear the screen
+	std::wcout << L"\033[H\033[J";
+
+	// Print file labels
+	std::wcout << ideographicSpace << ideographicSpace;
+	for(wchar_t file : fileLabels) {
+		std::wcout << file << punctuationSpace;
+	}
+	std::wcout << std::endl;
+	std::wcout << ideographicSpace << ideographicSpace;
+	for(int i = 0; i < 8; i++) {
+		std::wcout << i << punctuationSpace;
+	}
+	std::wcout << std::endl;
+
+	// Iterate over the ranks
+	for(int rank = 0; rank < RANKS; rank++) {
+		std::wcout << (8 - rank) << punctuationSpace;
+		std::wcout << (rank) << punctuationSpace;
+
+		// Iterate over the files
+		for(int file = 0; file < FILES; file++) {
+			if(m_boardMatrix[rank][file] == nullptr) {
+				std::wcout << ideographicSpace;
+			} else {
+				std::wcout << *m_boardMatrix[rank][file] << " ";
+			}
+		}
+
+		std::wcout << punctuationSpace << (rank) << punctuationSpace;
+		std::wcout << punctuationSpace << (8 - rank) << std::endl;
+	}
+
+	// Print file labels again
+	std::wcout << ideographicSpace << ideographicSpace;
+	for(wchar_t file : fileLabels) {
+		std::wcout << file << punctuationSpace;
+	}
+	std::wcout << std::endl;
+	std::wcout << ideographicSpace << ideographicSpace;
+	for(int i = 0; i < 8; i++) {
+		std::wcout << i << punctuationSpace;
+	}
+	std::wcout << std::endl;
 }
 
 void Chessboard::PrintSquaresUnderThreat() {
